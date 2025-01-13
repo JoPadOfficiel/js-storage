@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un produit</title>
+</head>
+<body>
+    <h1>Ajouter un produit</h1>
+    
+    <form id="produitForm">
+        <div>Produit : <input type="text" id="produit" required></div>
+        <div>Prix : <input type="number" id="prix" required></div>
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <div> 
+        <h2>Contenu du panier :</h2>
+        <div id="listeProduits"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

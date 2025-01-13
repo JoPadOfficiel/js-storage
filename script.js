@@ -1,3 +1,5 @@
+// *** Exo 1 ***
+/*
 const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
 
 function afficherContacts() {
@@ -26,46 +28,40 @@ document.getElementById('contactForm').addEventListener('submit', e => {
 
 
 afficherContacts();
+*/
 
+// *** Exo 2 **
 
+const produits = JSON.parse(localStorage.getItem('produits')) || [];
 
+function afficherProduits() {
+    const liste = document.getElementById('listeProduits');
+    liste.innerHTML = produits.map((p) => 
+        `- ${p.produit} : ${p.prix}, €`
+    ).join('<br>');
+    // Calculer le total
+    const total = produits.reduce((sum, p) => sum + parseFloat(p.prix), 0);
+    
+    /*
+    let total = 0;
+    for(let i = 0; i < produits.length; i++) {
+        total += +produits[i].prix;
+    }
+    */
+    liste.innerHTML += `<br><br>Total : ${total.toFixed(2)} €`;
+}
 
-
-
-/*
-
-// Version 2 with tableau
-
-// Ajouter un contact
-document.getElementById('contactForm').addEventListener('submit', e => {
+// Ajouter un produit
+document.getElementById('produitForm').addEventListener('submit', e => {
     e.preventDefault();
     
-    contacts.push({
-        nom: document.getElementById('nom').value,
-        email: document.getElementById('email').value,
-        telephone: document.getElementById('telephone').value
+    produits.push({
+        produit: document.getElementById('produit').value,
+        prix: document.getElementById('prix').value,
     });
     
-
     // Enregistrer et actualiser
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-    afficherContacts();
+    localStorage.setItem('produits', JSON.stringify(produits));
+    afficherProduits();
     e.target.reset();
-    //console.log(contacts);
-    for (let i = 0; i < contacts.length; i++) {    
-        console.log(contacts[i]);
-        localStorage.setItem('contacts', JSON.stringify(contacts))[i];
-        afficherContacts();
-        //console.log(contacts[i].nom);
-        //console.log(contacts[i].email);
-        //console.log(contacts[i].telephone);
-    }
-    function afficherContacts() {
-        const liste = document.getElementById('listeContacts');
-        liste.innerHTML = contacts.map((c) => 
-            `- Nom : ${c.nom}, Email : ${c.email}, Téléphone : ${c.telephone}`
-        ).join('<br>');
-    }
-    afficherContacts();
 });
-*/

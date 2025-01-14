@@ -36,11 +36,13 @@ const produits = JSON.parse(localStorage.getItem('produits')) || [];
 
 function afficherProduits() {
     const liste = document.getElementById('listeProduits');
-    liste.innerHTML = produits.map((p) => 
-        `- ${p.produit} : ${p.prix}, €`
+    liste.innerHTML = produits.map((p, index) => 
+        `- ${p.produit} : ${p.prix} € <button onclick="supprimer(${index})" class="delete-btn">Supprimer</button>`
     ).join('<br>');
+    
     // Calculer le total
     const total = produits.reduce((sum, p) => sum + parseFloat(p.prix), 0);
+    liste.innerHTML += `<br><br>Total : ${total.toFixed(2)} €`;
     
     /*
     let total = 0;
@@ -48,7 +50,6 @@ function afficherProduits() {
         total += +produits[i].prix;
     }
     */
-    liste.innerHTML += `<br><br>Total : ${total.toFixed(2)} €`;
 }
 
 // Ajouter un produit
@@ -65,3 +66,9 @@ document.getElementById('produitForm').addEventListener('submit', e => {
     afficherProduits();
     e.target.reset();
 });
+
+function supprimer(index) {
+    produits.splice(index, 1);
+    localStorage.setItem('produits', JSON.stringify(produits));
+    afficherProduits();
+}
